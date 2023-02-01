@@ -18,15 +18,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+  const MyHomePage({
+    super.key,
+  });
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -34,28 +34,24 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   AnimatedBloc _animatedBloc = AnimatedBloc();
-  int _width = 100;
-  int _height = 100;
-  String _text = "bek";
-  Color _colorText = Colors.red;
-  Color _colorContainer = Colors.blue;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("bek"),
       ),
       body: Center(
         child: BlocBuilder<AnimatedBloc, AnimatedState>(
           bloc: _animatedBloc,
           builder: (context, state) {
             if (state is ChangeContainerState) {
+              print('qwer ${state.width}');
               return AnimatedContainer(
                 height: state.height.toDouble(),
                 width: state.width.toDouble(),
                 duration: Duration(seconds: 1),
-               color: state.colorContainer,
+                color: state.colorContainer,
                 alignment: Alignment.center,
                 child: Text(
                   state.text,
@@ -63,29 +59,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               );
             }
-            return AnimatedContainer(
-              height: _height.toDouble(),
-              width: _width.toDouble(),
-              duration: Duration(seconds: 2),
-              decoration: BoxDecoration(color: _colorContainer),
-              alignment: Alignment.center,
-              child: Text(
-                _text,
-                style: TextStyle(color: _colorText),
-              ),
-            );
+            // return AnimatedContainer(
+            //   height: _height.toDouble(),
+            //   width: _width.toDouble(),
+            //   duration: Duration(seconds: 2),
+            //   decoration: BoxDecoration(color: _colorContainer),
+            //   alignment: Alignment.center,
+            //   child: Text(
+            //     _text,
+            //     style: TextStyle(color: _colorText),
+            //   ),
+            // );
+            return SizedBox();
           },
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _animatedBloc.add(ChangeContainerEvent(
-              height: _height,
-              width: _width,
-              text: _text,
-              colorText: _colorText,
-              colorContainer: _colorContainer));
-          print(_height);
+          _animatedBloc.add(ChangeContainerEvent());
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

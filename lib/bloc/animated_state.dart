@@ -6,11 +6,17 @@ abstract class AnimatedState {}
 class AnimatedInitial extends AnimatedState {}
 
 class ChangeContainerState extends AnimatedState {
+  
+    
+
   final int height;
   final int width;
-  final String text;
-  final Color colorText;
-  final Color colorContainer;
+ 
+      
+   final String text;
+   final Color colorText;
+   final Color colorContainer;
+
 
   ChangeContainerState({
     required this.colorText,
